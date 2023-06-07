@@ -16,7 +16,7 @@
 , unstableGitUpdater
 }:
 
-python3.pkgs.buildPythonApplication {
+python3.pkgs.buildPythonApplication rec {
   pname = "bunker";
   version = "unstable-2023-05-11";
 
@@ -62,9 +62,7 @@ python3.pkgs.buildPythonApplication {
     )
   '';
 
-  passthru.updateScript = unstableGitUpdater {
-    url = "https://git.sr.ht/~quark97/Bunker";
-  };
+  passthru.updateScript = unstableGitUpdater { url = src.meta.homepage; };
 
   meta = with lib; {
     description = "GTK4 Frontend to GoPass";

@@ -15,7 +15,7 @@
 , unstableGitUpdater
 }:
 
-python3.pkgs.buildPythonApplication {
+python3.pkgs.buildPythonApplication rec {
   pname = "flashcards";
   version = "unstable-2023-06-07";
 
@@ -57,9 +57,7 @@ python3.pkgs.buildPythonApplication {
     )
   '';
 
-  passthru.updateScript = unstableGitUpdater {
-    url = "https://github.com/fkinoshita/FlashCards.git";
-  };
+  passthru.updateScript = unstableGitUpdater { url = src.meta.homepage; };
 
   meta = with lib; {
     description = "Memorize anything";

@@ -16,9 +16,8 @@
 , cmake
 , pkg-config
 , ninja
-, desktop-file-utils
 , wrapGAppsHook
-, nix-update-script
+, gitUpdater
 }:
 
 stdenv.mkDerivation rec {
@@ -72,7 +71,7 @@ stdenv.mkDerivation rec {
     ln -sf ${presage}/share/presage $out/share/phosh/osk/presage
   '';
 
-  passthru.updateScript = nix-update-script { attrPath = pname; };
+  passthru.updateScript = gitUpdater { url = src.meta.homepage; rev-prefix = "v"; };
 
   meta = with lib; {
     description = "Experimental keyboard for phosh";

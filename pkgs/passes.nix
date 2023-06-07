@@ -64,9 +64,7 @@ python3.pkgs.buildPythonApplication rec {
     )
   '';
 
-  passthru.updateScript = unstableGitUpdater {
-    url = "https://github.com/pablo-s/passes.git";
-  };
+  passthru.updateScript = unstableGitUpdater { url = src.meta.homepage; };
 
   meta = with lib; {
     description = "Digital pass manager";

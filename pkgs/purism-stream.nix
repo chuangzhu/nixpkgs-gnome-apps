@@ -14,11 +14,12 @@
 , wrapGAppsHook
 , libsoup
 , glib-networking
+, unstableGitUpdater
 }:
 
-python3.pkgs.buildPythonApplication {
+python3.pkgs.buildPythonApplication rec {
   pname = "purism-stream";
-  version = "unstable-2022-10-26";
+  version = "unstable-2022-11-03";
 
   format = "other";
 
@@ -26,8 +27,8 @@ python3.pkgs.buildPythonApplication {
     domain = "source.puri.sm";
     owner = "todd";
     repo = "Stream";
-    rev = "30f91232dabd3041094ba89e63bebb24dc45afd2"; # master
-    sha256 = "sha256-IFs6xglPZ4pEmZRfAcDBjlzDBotX6rD4CVpPyI3HTfs=";
+    rev = "2c897eb126f0993f4e564d64e8e4e591c348aed1"; # master
+    sha256 = "sha256-EsF0UWioiN7g0vSJOQc+xt34+aRMpPPUvUcAmTdmhV0=";
   };
 
   postPatch = ''
@@ -63,6 +64,8 @@ python3.pkgs.buildPythonApplication {
   propagatedBuildInputs = with python3.pkgs; [
     pygobject3
   ];
+
+  passthru.updateScript = unstableGitUpdater { url = src.meta.homepage; };
 
   meta = with lib; {
     description = "Mobile-friendly GTK YouTube client";

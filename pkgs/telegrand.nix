@@ -15,6 +15,7 @@
 , tdlib
 , gst_all_1
 , clippy
+, unstableGitUpdater
 }:
 
 let
@@ -31,7 +32,7 @@ in
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "paper-plane";
-  version = "unstable-2023-05-28";
+  version = "unstable-2023-06-01";
 
   src = fetchFromGitHub {
     owner = "paper-plane-developers";
@@ -84,6 +85,8 @@ stdenv.mkDerivation (finalAttrs: {
   ];
 
   checkInputs = [ clippy ];
+
+  passthru.updateScript = unstableGitUpdater { url = finalAttrs.src.meta.homepage; };
 
   meta = with lib; {
     homepage = "https://github.com/paper-plane-developers/paper-plane/";

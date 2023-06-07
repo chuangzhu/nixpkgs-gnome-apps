@@ -9,19 +9,20 @@
 , ninja
 , desktop-file-utils
 , wrapGAppsHook4
+, gitUpdater
 }:
 
-python3.pkgs.buildPythonApplication {
+python3.pkgs.buildPythonApplication rec {
   pname = "avvie";
-  version = "unstable-2023-01-27";
+  version = "2.3";
 
   format = "other";
 
   src = fetchFromGitHub {
     owner = "Taiko2k";
     repo = "Avvie";
-    rev = "0b71c2ab4eb6d3af2c5456ab433e94ea0820d3a5"; # master
-    sha256 = "sha256-8CBbTCe56lMh4uGJUml2LizNWVCPeRfaFFDTOmEOVFU=";
+    rev = "v${version}"; # master
+    hash = "sha256-3Jf4DIwuGxIwUzluLTVSxxGCTaLS9mCUciIw9I2QXYw=";
   };
 
   postPatch = ''
@@ -57,6 +58,8 @@ python3.pkgs.buildPythonApplication {
       "''${gappsWrapperArgs[@]}"
     )
   '';
+
+  passthru.updateScript = gitUpdater { url = src.meta.homepage; rev-prefix = "v"; };
 
   meta = with lib; {
     description = "GTK app for quick image cropping";

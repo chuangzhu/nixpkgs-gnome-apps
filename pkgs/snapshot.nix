@@ -13,8 +13,8 @@
 , shared-mime-info
 , pipewire
 , gst_all_1
-, appstream
 , clippy
+, nix-update-script
 }:
 
 stdenv.mkDerivation (finalAttrs: {
@@ -61,6 +61,8 @@ stdenv.mkDerivation (finalAttrs: {
   ]);
 
   checkInputs = [ clippy ];
+
+  passthru.updateScript = nix-update-script { attrPath = finalAttrs.pname; };
 
   meta = with lib; {
     homepage = "https://gitlab.gnome.org/GNOME/Incubator/snapshot/";

@@ -5,7 +5,6 @@
 { stdenv
 , lib
 , fetchFromGitLab
-, appstream
 , rustPlatform
 , meson
 , pkg-config
@@ -24,6 +23,7 @@
 , libheif
 , libxml2
 , lcms2
+, nix-update-script
 }:
 
 stdenv.mkDerivation (finalAttrs: {
@@ -97,6 +97,8 @@ stdenv.mkDerivation (finalAttrs: {
   '';
 
   doCheck = true;
+
+  passthru.updateScript = nix-update-script { attrPath = finalAttrs.pname; };
 
   meta = with lib; {
     homepage = "https://gitlab.gnome.org/GNOME/Incubator/loupe/";
