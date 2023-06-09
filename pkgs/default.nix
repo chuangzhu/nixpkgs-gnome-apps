@@ -64,4 +64,5 @@ in
   telegrand = callPackage ./telegrand.nix { };
   flashcards = callPackage ./flashcards.nix { };
   loupe = callPackage ./loupe.nix { };
+  tubefeeder = callPackage ./tubefeeder.nix { };
 }

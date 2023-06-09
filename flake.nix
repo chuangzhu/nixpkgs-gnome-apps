@@ -26,7 +26,7 @@
           # flake-compat (as update-source-version do), so be sure to pass the `url` argument
           (with lib; writeShellScriptBin "update" (foldlAttrs (acc: name: value: acc + "\n" +
             optionalString (value.passthru ? updateScript) (
-              let script = value.passthru.updateScript.command or value.passthru.updateScript; in
+              let script = flatten (value.passthru.updateScript.command or value.passthru.updateScript); in
               "UPDATE_NIX_ATTR_PATH=packages.${stdenv.hostPlatform.system}.${name} ${escapeShellArgs script}" +
               (optionalString (hasInfix "nix-update" (toString script)) " --flake"))
           ) "set -xe" self.packages.${stdenv.hostPlatform.system}))
