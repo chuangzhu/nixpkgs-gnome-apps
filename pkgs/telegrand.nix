@@ -1,15 +1,18 @@
 { lib
 , stdenv
 , fetchFromGitHub
+, fetchFromGitLab
+, fetchpatch
+, appstream
 , rustPlatform
 , meson
 , pkg-config
 , desktop-file-utils
 , ninja
-, wrapGAppsHook_4_11
+, wrapGAppsHook
 , blueprint-compiler_0_8
-, gtk_4_11
-, libadwaita_1_4
+, gtk4
+, libadwaita
 , gdk-pixbuf
 , rlottie, llvmPackages
 , tdlib
@@ -19,6 +22,27 @@
 }:
 
 let
+  # With gtk_4_11 it launches, but panics after login
+  # thread 'main' panicked at 'called `Option::unwrap()` on a `None` value', src/session/sidebar/avatar.rs:144:14
+  gtk4_ = gtk4.overrideAttrs (old: {
+    patches = old.patches ++ lib.singleton (fetchpatch {
+      url = "https://github.com/paper-plane-developers/paper-plane/raw/380720b0a0915d230052f82f183df7a22e3a47e3/build-aux/gtk-reversed-list.patch";
+      hash = "sha256-q1izvd9sE/WZ3s374EvN0I0GH1Em0YZOaNb+s8WyYsI=";
+    });
+  });
+  libadwaita_1_4 = (libadwaita.override { gtk4 = gtk4_; }).overrideAttrs (old: {
+    version = "unstable-2023-03-29";
+    src = fetchFromGitLab {
+      domain = "gitlab.gnome.org";
+      owner = "GNOME";
+      repo = "libadwaita";
+      rev = "57bc21b4c51aa361609fe6f57031630589391b0b";
+      hash = "sha256-5C0tHLO2OoR2KsqRqetSw+JeW4Cfcrj/uLouAAUgrTE=";
+    };
+    buildInputs = old.buildInputs ++ [ appstream ];
+  });
+  wrapGAppsHook4 = wrapGAppsHook.override { gtk3 = gtk4_; };
+
   tdlib_1_8_14 = tdlib.overrideAttrs (old: {
     version = "1.8.14";
     src = fetchFromGitHub {
@@ -32,13 +56,13 @@ in
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "paper-plane";
-  version = "unstable-2023-06-01";
+  version = "unstable-2023-06-08";
 
   src = fetchFromGitHub {
     owner = "paper-plane-developers";
     repo = "paper-plane";
-    rev = "a79040ff8da33566d8e200e3d827d4070b024cc9";
-    hash = "sha256-dgmhmLWePG3YDrlulP2FQFxbagNSA+/6/mWJSAqagfA=";
+    rev = "cf4439ce3f8d52d971a9bde257d864083bcf21f6";
+    hash = "sha256-62/4Yyuzkc+tEOl96ba3SHPRe1L6TDcFLcC13D3bA7U=";
   };
 
   cargoDeps = rustPlatform.importCargoLock {
@@ -54,7 +78,7 @@ stdenv.mkDerivation (finalAttrs: {
     pkg-config
     desktop-file-utils # update-desktop-database
     ninja
-    wrapGAppsHook_4_11
+    wrapGAppsHook4
     blueprint-compiler_0_8
   ] ++ (with rustPlatform; [
     cargoSetupHook
@@ -63,7 +87,7 @@ stdenv.mkDerivation (finalAttrs: {
   ]);
 
   buildInputs = [
-    gtk_4_11
+    gtk4_
     libadwaita_1_4
     gdk-pixbuf
     rlottie
