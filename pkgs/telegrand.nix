@@ -56,13 +56,13 @@ in
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "paper-plane";
-  version = "unstable-2023-06-08";
+  version = "unstable-2023-06-11";
 
   src = fetchFromGitHub {
     owner = "paper-plane-developers";
     repo = "paper-plane";
-    rev = "cf4439ce3f8d52d971a9bde257d864083bcf21f6";
-    hash = "sha256-62/4Yyuzkc+tEOl96ba3SHPRe1L6TDcFLcC13D3bA7U=";
+    rev = "d9061a5f268228f2f3019fb404596deb53831501";
+    hash = "sha256-xW3YIetR8rZoaRpZefygMh55qCfa7o+Uw7tVi/pihjE=";
   };
 
   cargoDeps = rustPlatform.importCargoLock {
