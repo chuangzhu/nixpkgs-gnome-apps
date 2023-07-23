@@ -2,6 +2,8 @@
 , stdenv
 , fetchFromGitLab
 , rustPlatform
+, cargo
+, rustc
 , meson
 , pkg-config
 , desktop-file-utils
@@ -40,11 +42,10 @@ stdenv.mkDerivation (finalAttrs: {
     desktop-file-utils # update-desktop-database
     ninja
     wrapGAppsHook_4_11
-  ] ++ (with rustPlatform; [
-    cargoSetupHook
-    rust.cargo
-    rust.rustc
-  ]);
+    rustPlatform.cargoSetupHook
+    cargo
+    rustc
+  ];
 
   buildInputs = [
     gtk_4_11

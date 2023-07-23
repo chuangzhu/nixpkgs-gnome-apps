@@ -1,10 +1,11 @@
 { lib
 , stdenv
 , rustPlatform
+, cargo
+, rustc
 , fetchFromGitHub
 , gtk4
 , libadwaita
-, openssl
 , meson
 , ninja
 , pkg-config
@@ -35,9 +36,9 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [
     meson
     ninja
-    rustPlatform.rust.cargo
+    cargo
     rustPlatform.cargoSetupHook
-    rustPlatform.rust.rustc
+    rustc
     pkg-config
     wrapGAppsHook4
     glib
