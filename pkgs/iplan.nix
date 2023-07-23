@@ -17,19 +17,19 @@
 
 stdenv.mkDerivation rec {
   pname = "iplan";
-  version = "1.5.0";
+  version = "1.9.2";
 
   src = fetchFromGitHub {
     owner = "iman-salmani";
     repo = pname;
     rev = "v${version}";
-    hash = "sha256-LzL9lwCChGrnaU0JHRbu0FRwnG5p3nxVrUnYGyuag6k=";
+    hash = "sha256-BIoxaE8c3HmvPjgj4wcZK9YFTZ0wr9338AIdYEoAiqs=";
   };
 
   cargoDeps = rustPlatform.fetchCargoTarball {
     inherit src;
     name = "${pname}-${version}";
-    hash = "sha256-JciGrlnpDM+kkEt0NAtVaxvPQL/634SqFyZJqvPICio=";
+    hash = "sha256-p8ETWWvjtP9f/lc347ORPqTai5p/TWQCCMRe+c0FyFk=";
   };
 
   nativeBuildInputs = [

@@ -11,13 +11,13 @@
 let
   callPackage = lib.callPackageWith (pkgs // rec {
     gtk_4_11 = gtk4.overrideAttrs (old: rec {
-      version = "4.11.3";
+      version = "4.11.4";
       src = fetchFromGitLab {
         domain = "gitlab.gnome.org";
         owner = "GNOME";
         repo = "gtk";
         rev = version;
-        hash = "sha256-KCGqVt2nFfzumPxsR2X2VbYLZNLKgV+LhBf8wsV9KP0=";
+        hash = "sha256-YobWcLJm8owjrz6c6aPMCrVZqYDvNpjIt5Zea2CtAZY=";
       };
       patches = [ ./gtk-reversed-list.patch ];
       postPatch = old.postPatch + ''
@@ -26,14 +26,14 @@ let
     });
     wrapGAppsHook_4_11 = wrapGAppsHook.override { gtk3 = gtk_4_11; };
 
-    libadwaita_1_4 = (libadwaita.override { gtk4 = gtk_4_11; }).overrideAttrs (old: {
-      version = "unstable-2023-06-05";
+    libadwaita_1_4 = (libadwaita.override { gtk4 = gtk_4_11; }).overrideAttrs (old: rec {
+      version = "1.4.alpha";
       src = fetchFromGitLab {
         domain = "gitlab.gnome.org";
         owner = "GNOME";
         repo = "libadwaita";
-        rev = "d5af77fd33265e8308f6f05b26d514376c79b0ce";
-        hash = "sha256-+uKG4igj6WMVUuNom4+eVczYTa9VrDhXOBH5Rqx7igs=";
+        rev = version;
+        hash = "sha256-UUS5b6diRenpxxmGvVJoc6mVjEVGS9afLd8UKu+CJvI=";
       };
       buildInputs = old.buildInputs ++ [ appstream ];
     });

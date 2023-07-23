@@ -16,14 +16,14 @@
 }:
 
 stdenv.mkDerivation rec {
-  pname = "tubefeeder";
-  version = "1.10.0";
+  pname = "pipeline";
+  version = "1.11.0";
 
   src = fetchFromGitHub {
     owner = "Tubefeeder";
-    repo = "Tubefeeder";
+    repo = "Pipeline";
     rev = "v${version}";
-    sha256 = "sha256-jwuJJWLArfPUJGn9ieIi9DOKXf+eE07fllTxBsxHs4g=";
+    sha256 = "sha256-+ZnKi/nHnqp4zoCGbfozWT4Ge63aXG4sEd59d54qaqY=";
   };
 
   postPatch = ''
@@ -33,7 +33,7 @@ stdenv.mkDerivation rec {
   cargoDeps = rustPlatform.fetchCargoTarball {
     inherit src;
     name = "${pname}-${version}";
-    sha256 = "sha256-63euT7hf6UoKsdgT5c8wmZmZ3WXxGgimsUlhQT+1z1o=";
+    sha256 = "sha256-4pq6fX6nxLGWbRPkg600IdddQ7SuS9axgKr3cuse1wk=";
   };
 
   nativeBuildInputs = [

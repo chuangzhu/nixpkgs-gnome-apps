@@ -32,8 +32,7 @@ stdenv.mkDerivation (finalAttrs: {
 
   src = fetchFromGitLab {
     domain = "gitlab.gnome.org";
-    group = "GNOME";
-    owner = "Incubator";
+    owner = "GNOME";
     repo = "loupe";
     rev = finalAttrs.version;
     hash = "sha256-Q6cFKQuBNu9/8h46HQN9xtevwRCjkxXXHHuJfT/QcjA=";

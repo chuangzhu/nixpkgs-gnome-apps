@@ -14,7 +14,7 @@
 
 python3.pkgs.buildPythonApplication rec {
   pname = "avvie";
-  version = "2.3";
+  version = "2.4";
 
   format = "other";
 
@@ -22,7 +22,7 @@ python3.pkgs.buildPythonApplication rec {
     owner = "Taiko2k";
     repo = "Avvie";
     rev = "v${version}"; # master
-    hash = "sha256-3Jf4DIwuGxIwUzluLTVSxxGCTaLS9mCUciIw9I2QXYw=";
+    hash = "sha256-Y3Tf+EC7uwgVpHltV3qa5aY/5S3ANminfX5RNpGTQGA=";
   };
 
   postPatch = ''

@@ -18,15 +18,15 @@
 
 python3.pkgs.buildPythonApplication rec {
   pname = "passes";
-  version = "unstable-2023-04-13";
+  version = "unstable-2023-07-13";
 
   format = "other";
 
   src = fetchFromGitHub {
     owner = "pablo-s";
     repo = pname;
-    rev = "1039d9cf7441e3f14f3f6d7a3192809e2c38ec5e";
-    hash = "sha256-3XHHF/4EcI7ZC1WFm51q3Hz0ZCr1Tu57zvDLgvVwTHc=";
+    rev = "3d4f3e197ac6835e67188911ac6642ee09f7b86e";
+    hash = "sha256-7l7q/DnZbIuI1347WDAHgashSEH/NboLDUgP2x67vbc=";
   };
 
   postPatch = ''
