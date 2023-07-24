@@ -11,7 +11,7 @@
 , gettext
 , glib
 , desktop-file-utils
-, blueprint-compiler
+, blueprint-compiler_0_6
 , wrapGAppsHook
 , unstableGitUpdater
 }:
@@ -41,7 +41,7 @@ python3.pkgs.buildPythonApplication rec {
     gettext
     glib
     desktop-file-utils
-    blueprint-compiler
+    blueprint-compiler_0_6
     wrapGAppsHook
   ];
 

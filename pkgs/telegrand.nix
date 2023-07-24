@@ -9,7 +9,7 @@
 , desktop-file-utils
 , ninja
 , wrapGAppsHook_4_11
-, blueprint-compiler_0_8
+, blueprint-compiler
 , gtk_4_11
 , libadwaita_1_4
 , gdk-pixbuf
@@ -56,7 +56,7 @@ stdenv.mkDerivation (finalAttrs: {
     desktop-file-utils # update-desktop-database
     ninja
     wrapGAppsHook_4_11
-    blueprint-compiler_0_8
+    blueprint-compiler
     rustPlatform.cargoSetupHook
     cargo
     rustc

@@ -38,16 +38,15 @@ let
       buildInputs = old.buildInputs ++ [ appstream ];
     });
 
-    blueprint-compiler_0_8 = blueprint-compiler.overrideAttrs (old: rec {
-      version = "0.8.1";
+    blueprint-compiler_0_6 = blueprint-compiler.overrideAttrs (old: rec {
+      version = "0.6.0";
       src = fetchFromGitLab {
         domain = "gitlab.gnome.org";
         owner = "jwestman";
         repo = "blueprint-compiler";
         rev = "v${version}";
-        hash = "sha256-3lj9BMN5aNujbhhZjObdTOCQfH5ERQCgGqIAw5eZIQc=";
+        hash = "sha256-L6EGterkZ8EB6xSnJDZ3IMuOumpTpEGnU74X3UgC7k0=";
       };
-      doCheck = false;
     });
   });
 in
