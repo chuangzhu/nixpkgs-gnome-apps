@@ -11,13 +11,13 @@
 let
   callPackage = lib.callPackageWith (pkgs // rec {
     gtk_4_11 = gtk4.overrideAttrs (old: rec {
-      version = "4.11.4";
+      version = "4.12.3";
       src = fetchFromGitLab {
         domain = "gitlab.gnome.org";
         owner = "GNOME";
         repo = "gtk";
         rev = version;
-        hash = "sha256-YobWcLJm8owjrz6c6aPMCrVZqYDvNpjIt5Zea2CtAZY=";
+        hash = "sha256-KOAGRP1n1D1VR7B3kATijcJP1VDcH6nnYVNno1Lu6T8=";
       };
       patches = [ ./gtk-reversed-list.patch ];
       postPatch = old.postPatch + ''
@@ -27,13 +27,13 @@ let
     wrapGAppsHook_4_11 = wrapGAppsHook.override { gtk3 = gtk_4_11; };
 
     libadwaita_1_4 = (libadwaita.override { gtk4 = gtk_4_11; }).overrideAttrs (old: rec {
-      version = "1.4.alpha";
+      version = "1.4.0";
       src = fetchFromGitLab {
         domain = "gitlab.gnome.org";
         owner = "GNOME";
         repo = "libadwaita";
         rev = version;
-        hash = "sha256-UUS5b6diRenpxxmGvVJoc6mVjEVGS9afLd8UKu+CJvI=";
+        hash = "sha256-LXrlTca50ALo+Nm55fwXNb4k3haLqHNnzLPc08VhA5s=";
       };
       buildInputs = old.buildInputs ++ [ appstream ];
     });
@@ -58,11 +58,11 @@ in
   bunker = callPackage ./bunker.nix { };
   passes = callPackage ./passes.nix { };
   avvie = callPackage ./avvie.nix { };
-  paper-note = callPackage ./paper-note.nix { };
-  snapshot = callPackage ./snapshot.nix { };
-  telegrand = callPackage ./telegrand.nix { };
+  # paper-note = callPackage ./paper-note.nix { };
+  # snapshot = callPackage ./snapshot.nix { };
+  # telegrand = callPackage ./telegrand.nix { };
   flashcards = callPackage ./flashcards.nix { };
   loupe = callPackage ./loupe.nix { };
-  tubefeeder = callPackage ./tubefeeder.nix { };
+  pipeline = callPackage ./tubefeeder.nix { };
   iplan = callPackage ./iplan.nix { };
 }

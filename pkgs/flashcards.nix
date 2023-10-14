@@ -17,15 +17,15 @@
 
 python3.pkgs.buildPythonApplication rec {
   pname = "flashcards";
-  version = "unstable-2023-06-11";
+  version = "unstable-2023-07-26";
 
   format = "other";
 
   src = fetchFromGitHub {
     owner = "fkinoshita";
     repo = "FlashCards";
-    rev = "31d2be1cd5ea96be5266aedf24f73e8ac8a42c35"; # main
-    hash = "sha256-aPnXazBWO+fjRbn1BzCO+kuYPT3y7SwPM97HK44Pm5Y=";
+    rev = "e1cd7bd7c7fb91e0aca0c1958b8c5f96b792bd19"; # main
+    hash = "sha256-FiXbn+v05uF2/jJO75kv8aWNp+Uqz1z7QQdYw5H6WBs=";
   };
 
   nativeBuildInputs = [

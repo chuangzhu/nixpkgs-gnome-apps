@@ -2,7 +2,7 @@
 , python3
 , fetchFromGitHub
 , gtk4
-, libadwaita
+, libadwaita_1_4
 , gobject-introspection
 , zint
 , meson
@@ -11,22 +11,22 @@
 , gettext
 , glib
 , desktop-file-utils
-, blueprint-compiler_0_6
+, blueprint-compiler
 , wrapGAppsHook
 , unstableGitUpdater
 }:
 
 python3.pkgs.buildPythonApplication rec {
   pname = "passes";
-  version = "unstable-2023-07-13";
+  version = "unstable-2023-09-28";
 
   format = "other";
 
   src = fetchFromGitHub {
     owner = "pablo-s";
     repo = pname;
-    rev = "3d4f3e197ac6835e67188911ac6642ee09f7b86e";
-    hash = "sha256-7l7q/DnZbIuI1347WDAHgashSEH/NboLDUgP2x67vbc=";
+    rev = "d151ab2043bd25b76335743c5b8c3fc072f8ecb6";
+    hash = "sha256-eo84gttNKVylMG/Q+K9hxLm08zDRNwXvpe4sFYM7czA=";
   };
 
   postPatch = ''
@@ -41,13 +41,13 @@ python3.pkgs.buildPythonApplication rec {
     gettext
     glib
     desktop-file-utils
-    blueprint-compiler_0_6
+    blueprint-compiler
     wrapGAppsHook
   ];
 
   buildInputs = [
     gtk4
-    libadwaita
+    libadwaita_1_4
     gobject-introspection
     zint
   ];

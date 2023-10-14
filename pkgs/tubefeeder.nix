@@ -3,7 +3,7 @@
 , rustPlatform
 , cargo
 , rustc
-, fetchFromGitHub
+, fetchFromGitLab
 , gtk4
 , libadwaita
 , openssl
@@ -17,25 +17,32 @@
 , nix-update-script
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "pipeline";
-  version = "1.11.0";
+  version = "1.13.1";
 
-  src = fetchFromGitHub {
-    owner = "Tubefeeder";
-    repo = "Pipeline";
-    rev = "v${version}";
-    sha256 = "sha256-+ZnKi/nHnqp4zoCGbfozWT4Ge63aXG4sEd59d54qaqY=";
+  src = fetchFromGitLab {
+    owner = "schmiddi-on-mobile";
+    repo = "pipeline";
+    rev = "v${finalAttrs.version}";
+    hash = "sha256-TuULs+6TWmNMZhF+BCL7aDieiaGIGOTMzAsS9624XHo=";
   };
 
   postPatch = ''
     substituteInPlace data/de.schmidhuberj.tubefeeder.desktop --replace "/app/bin/tubefeeder" "tubefeeder"
   '';
 
-  cargoDeps = rustPlatform.fetchCargoTarball {
-    inherit src;
-    name = "${pname}-${version}";
-    sha256 = "sha256-4pq6fX6nxLGWbRPkg600IdddQ7SuS9axgKr3cuse1wk=";
+  cargoDeps = rustPlatform.importCargoLock {
+    lockFile = finalAttrs.src + /Cargo.lock;
+    outputHashes = {
+      "tf_core-0.1.4" = "sha256-nAqoI0/LaHDmdhm/3Z2WLkOMbjkvLU6VD2haEi/YFJc=";
+      "tf_join-0.1.7" = "sha256-nAqoI0/LaHDmdhm/3Z2WLkOMbjkvLU6VD2haEi/YFJc=";
+      "tf_filter-0.1.3" = "sha256-nAqoI0/LaHDmdhm/3Z2WLkOMbjkvLU6VD2haEi/YFJc=";
+      "tf_observer-0.1.3" = "sha256-nAqoI0/LaHDmdhm/3Z2WLkOMbjkvLU6VD2haEi/YFJc=";
+      "tf_playlist-0.1.4" = "sha256-nAqoI0/LaHDmdhm/3Z2WLkOMbjkvLU6VD2haEi/YFJc=";
+      "tf_platform_youtube-0.1.7" = "sha256-nAqoI0/LaHDmdhm/3Z2WLkOMbjkvLU6VD2haEi/YFJc=";
+      "tf_platform_peertube-0.1.5" = "sha256-nAqoI0/LaHDmdhm/3Z2WLkOMbjkvLU6VD2haEi/YFJc=";
+    };
   };
 
   nativeBuildInputs = [
@@ -56,13 +63,13 @@ stdenv.mkDerivation rec {
     openssl
   ];
 
-  passthru.updateScript = nix-update-script { attrPath = pname; };
+  passthru.updateScript = nix-update-script { attrPath = finalAttrs.pname; };
 
   meta = with lib; {
-    description = "Youtube, Lbry and Peertube client made for the Pinephone";
-    homepage = "https://www.tubefeeder.de";
+    description = "Watch YouTube and PeerTube videos in one place";
+    homepage = "https://mobile.schmidhuberj.de/pipeline";
     license = licenses.gpl3Plus;
     maintainers = with maintainers; [ chuangzhu ];
     platforms = platforms.linux;
   };
-}
+})

@@ -15,38 +15,40 @@
 , gdk-pixbuf
 , rlottie, llvmPackages
 , tdlib
+, libshumate
 , gst_all_1
 , clippy
 , unstableGitUpdater
 }:
 
 let
-  tdlib_1_8_14 = tdlib.overrideAttrs (old: {
-    version = "1.8.14";
+  tdlib_1_8_19 = tdlib.overrideAttrs (old: {
+    version = "1.8.19";
     src = fetchFromGitHub {
       owner = "tdlib";
       repo = "td";
-      rev = "8517026415e75a8eec567774072cbbbbb52376c1";
-      hash = "sha256-Q6p/DAyAF1mVhIbjgITjCmynb5Y/fajhBL6/POrNWmE=";
+      rev = "2589c3fd46925f5d57e4ec79233cd1bd0f5d0c09";
+      hash = "sha256-mbhxuJjrV3nC8Ja7N0WWF9ByHovJLmoLLuuzoU4khjU=";
     };
   });
 in
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "paper-plane";
-  version = "unstable-2023-07-08";
+  version = "unstable-2023-10-10";
 
   src = fetchFromGitHub {
     owner = "paper-plane-developers";
     repo = "paper-plane";
-    rev = "4a9945429cdc446b323e390e8c1163944582051e";
-    hash = "sha256-/kNdojus3OTaHR46MdTq+dp/nAvwme/+YgGbB8Na/1s=";
+    rev = "1e62a29657aa034b81a5be2f79daf5bb9a6a98ed";
+    hash = "sha256-W+G+S5lDOEOkcYnDavbfleaVkv2qMGLLc8P7ta0yzZY=";
   };
 
   cargoDeps = rustPlatform.importCargoLock {
     lockFile = finalAttrs.src + /Cargo.lock;
     outputHashes = {
-      "gtk-rlottie-0.1.0" = "sha256-gFjyJVQZ7/l6O04QP0ORbW8LWoQ19oyO9E+Z+ehefco=";
+      "gtk-rlottie-0.1.0" = "sha256-/F0VSXU0Z59QyFYXrB8NLe/Nw/uVjGY68BriOySSXyI=";
+      "origami-0.1.0" = "sha256-xh7eBjumqCOoAEvRkivs/fgvsKXt7UU67FCFt20oh5s=";
     };
   };
 
@@ -67,7 +69,8 @@ stdenv.mkDerivation (finalAttrs: {
     libadwaita_1_4
     gdk-pixbuf
     rlottie
-    tdlib_1_8_14
+    tdlib_1_8_19
+    libshumate
   ] ++ (with gst_all_1; [
     gstreamer
     gst-libav

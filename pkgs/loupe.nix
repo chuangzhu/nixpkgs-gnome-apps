@@ -30,21 +30,18 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "loupe";
-  version = "44.3";
+  version = "45.0";
 
   src = fetchFromGitLab {
     domain = "gitlab.gnome.org";
     owner = "GNOME";
     repo = "loupe";
     rev = finalAttrs.version;
-    hash = "sha256-Q6cFKQuBNu9/8h46HQN9xtevwRCjkxXXHHuJfT/QcjA=";
+    hash = "sha256-oJmcIY3sk7I3kVLWis4efN8C/cSwsqBokPR9QCaJa6o=";
   };
 
   cargoDeps = rustPlatform.importCargoLock {
     lockFile = finalAttrs.src + /Cargo.lock;
-    outputHashes = {
-      "librsvg-2.56.0" = "sha256-xwM901x9ZnFUrvtJiIocyBgBd0fVzPimr87FQTYajoE=";
-    };
   };
 
   nativeBuildInputs = [
