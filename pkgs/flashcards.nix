@@ -1,8 +1,8 @@
 { lib
 , python3
 , fetchFromGitHub
-, gtk_4_11
-, libadwaita_1_4
+, gtk4
+, libadwaita
 , gobject-introspection
 , meson
 , pkg-config
@@ -11,7 +11,7 @@
 , glib
 , desktop-file-utils
 , blueprint-compiler
-, wrapGAppsHook_4_11
+, wrapGAppsHook4
 , unstableGitUpdater
 }:
 
@@ -36,12 +36,12 @@ python3.pkgs.buildPythonApplication rec {
     glib
     desktop-file-utils
     blueprint-compiler
-    wrapGAppsHook_4_11
+    wrapGAppsHook4
   ];
 
   buildInputs = [
-    gtk_4_11
-    libadwaita_1_4
+    gtk4
+    libadwaita
     gobject-introspection
   ];
 

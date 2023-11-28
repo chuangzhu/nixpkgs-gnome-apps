@@ -1,6 +1,7 @@
 { lib
 , stdenv
 , fetchFromGitHub
+, fetchpatch
 , rustPlatform
 , cargo
 , rustc
@@ -8,10 +9,10 @@
 , pkg-config
 , desktop-file-utils
 , ninja
-, wrapGAppsHook_4_11
+, wrapGAppsHook
 , blueprint-compiler
-, gtk_4_11
-, libadwaita_1_4
+, gtk4
+, libadwaita
 , gdk-pixbuf
 , rlottie, llvmPackages
 , tdlib
@@ -22,6 +23,13 @@
 }:
 
 let
+  gtk4_ = gtk4.overrideAttrs (old: {
+    patches = old.patches ++ lib.singleton (fetchpatch {
+      url = "https://github.com/paper-plane-developers/paper-plane/raw/380720b0a0915d230052f82f183df7a22e3a47e3/build-aux/gtk-reversed-list.patch";
+      hash = "sha256-q1izvd9sE/WZ3s374EvN0I0GH1Em0YZOaNb+s8WyYsI=";
+    });
+  });
+  wrapGAppsHook4_ = wrapGAppsHook.override { gtk3 = gtk4_; };
   tdlib_1_8_19 = tdlib.overrideAttrs (old: {
     version = "1.8.19";
     src = fetchFromGitHub {
@@ -35,13 +43,13 @@ in
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "paper-plane";
-  version = "unstable-2023-10-10";
+  version = "unstable-2023-11-03";
 
   src = fetchFromGitHub {
     owner = "paper-plane-developers";
     repo = "paper-plane";
-    rev = "1e62a29657aa034b81a5be2f79daf5bb9a6a98ed";
-    hash = "sha256-W+G+S5lDOEOkcYnDavbfleaVkv2qMGLLc8P7ta0yzZY=";
+    rev = "0cb40abfec19562a2e5b15b916b738cebb3645e3";
+    hash = "sha256-qcAHxNnF980BHMqLF86M06YQnEN5L/8nkyrX6HQjpBA=";
   };
 
   cargoDeps = rustPlatform.importCargoLock {
@@ -57,16 +65,17 @@ stdenv.mkDerivation (finalAttrs: {
     pkg-config
     desktop-file-utils # update-desktop-database
     ninja
-    wrapGAppsHook_4_11
+    wrapGAppsHook4_
     blueprint-compiler
     rustPlatform.cargoSetupHook
+    rustPlatform.bindgenHook
     cargo
     rustc
   ];
 
   buildInputs = [
-    gtk_4_11
-    libadwaita_1_4
+    gtk4
+    libadwaita
     gdk-pixbuf
     rlottie
     tdlib_1_8_19
@@ -77,9 +86,6 @@ stdenv.mkDerivation (finalAttrs: {
     gst-plugins-base
     (gst-plugins-good.override { gtkSupport = true; })
   ]);
-
-  LIBCLANG_PATH = "${llvmPackages.libclang.lib}/lib";
-  BINDGEN_EXTRA_CLANG_ARGS = "-isystem ${llvmPackages.libclang.lib}/lib/clang/${lib.getVersion llvmPackages.clang}/include -isystem ${rlottie}/include";
 
   # Stolen from <nixpkgs/pkgs/applications/networking/instant-messengers/telegram/telegram-desktop/default.nix>
   mesonFlags = [

@@ -19,29 +19,19 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "pipeline";
-  version = "1.13.1";
+  version = "1.14.1";
 
   src = fetchFromGitLab {
     owner = "schmiddi-on-mobile";
     repo = "pipeline";
     rev = "v${finalAttrs.version}";
-    hash = "sha256-TuULs+6TWmNMZhF+BCL7aDieiaGIGOTMzAsS9624XHo=";
+    hash = "sha256-CQFxNA6gC5mUdyFbf/oMK5kLtzRhglXCDHnyb9XQOSg=";
   };
-
-  postPatch = ''
-    substituteInPlace data/de.schmidhuberj.tubefeeder.desktop --replace "/app/bin/tubefeeder" "tubefeeder"
-  '';
 
   cargoDeps = rustPlatform.importCargoLock {
     lockFile = finalAttrs.src + /Cargo.lock;
     outputHashes = {
-      "tf_core-0.1.4" = "sha256-nAqoI0/LaHDmdhm/3Z2WLkOMbjkvLU6VD2haEi/YFJc=";
-      "tf_join-0.1.7" = "sha256-nAqoI0/LaHDmdhm/3Z2WLkOMbjkvLU6VD2haEi/YFJc=";
-      "tf_filter-0.1.3" = "sha256-nAqoI0/LaHDmdhm/3Z2WLkOMbjkvLU6VD2haEi/YFJc=";
-      "tf_observer-0.1.3" = "sha256-nAqoI0/LaHDmdhm/3Z2WLkOMbjkvLU6VD2haEi/YFJc=";
-      "tf_playlist-0.1.4" = "sha256-nAqoI0/LaHDmdhm/3Z2WLkOMbjkvLU6VD2haEi/YFJc=";
-      "tf_platform_youtube-0.1.7" = "sha256-nAqoI0/LaHDmdhm/3Z2WLkOMbjkvLU6VD2haEi/YFJc=";
-      "tf_platform_peertube-0.1.5" = "sha256-nAqoI0/LaHDmdhm/3Z2WLkOMbjkvLU6VD2haEi/YFJc=";
+      "tf_core-0.1.4" = "sha256-bWkF1ezdDZyuP2zo5EIvB/Br6HFpdmkDijpQii/4i68=";
     };
   };
 
