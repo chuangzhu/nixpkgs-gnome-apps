@@ -35,4 +35,5 @@ in
   flashcards = callPackage ./flashcards.nix { };
   pipeline = callPackage ./tubefeeder.nix { };
   iplan = callPackage ./iplan.nix { };
+  dewduct = callPackage ./dewduct.nix { };
 }
