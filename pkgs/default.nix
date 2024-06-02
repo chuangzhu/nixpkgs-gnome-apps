@@ -24,12 +24,8 @@ in
   gadgetcontroller = callPackage ./gadgetcontroller.nix { };
   phosh-osk-stub= callPackage ./phosh-osk-stub.nix { };
   bunker = callPackage ./bunker.nix { };
-  passes = callPackage ./passes.nix { };
   avvie = callPackage ./avvie.nix { };
-  # paper-note = callPackage ./paper-note.nix { };
-  telegrand = callPackage ./telegrand.nix { };
   flashcards = callPackage ./flashcards.nix { };
   pipeline = callPackage ./tubefeeder.nix { };
-  iplan = callPackage ./iplan.nix { };
   dewduct = callPackage ./dewduct.nix { };
 }
