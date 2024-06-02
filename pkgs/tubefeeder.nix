@@ -14,6 +14,7 @@
 , glib
 , appstream-glib
 , desktop-file-utils
+, blueprint-compiler
 , nix-update-script
 }:
 
@@ -47,6 +48,7 @@ stdenv.mkDerivation (finalAttrs: {
     glib
     appstream-glib
     desktop-file-utils
+    blueprint-compiler
   ];
   buildInputs = [
     gtk4

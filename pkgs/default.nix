@@ -1,9 +1,5 @@
 { lib
 , fetchFromGitLab
-, gtk4
-, wrapGAppsHook
-, libadwaita
-, appstream
 , blueprint-compiler
 , ...
 } @ pkgs:

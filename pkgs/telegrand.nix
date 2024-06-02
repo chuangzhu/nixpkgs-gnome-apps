@@ -24,7 +24,7 @@
 
 let
   gtk4_ = gtk4.overrideAttrs (old: {
-    patches = old.patches ++ lib.singleton (fetchpatch {
+    patches = (old.patches or [ ]) ++ lib.singleton (fetchpatch {
       url = "https://github.com/paper-plane-developers/paper-plane/raw/380720b0a0915d230052f82f183df7a22e3a47e3/build-aux/gtk-reversed-list.patch";
       hash = "sha256-q1izvd9sE/WZ3s374EvN0I0GH1Em0YZOaNb+s8WyYsI=";
     });
@@ -55,8 +55,8 @@ stdenv.mkDerivation (finalAttrs: {
   cargoDeps = rustPlatform.importCargoLock {
     lockFile = finalAttrs.src + /Cargo.lock;
     outputHashes = {
-      "gtk-rlottie-0.1.0" = "sha256-/F0VSXU0Z59QyFYXrB8NLe/Nw/uVjGY68BriOySSXyI=";
-      "origami-0.1.0" = "sha256-xh7eBjumqCOoAEvRkivs/fgvsKXt7UU67FCFt20oh5s=";
+      "gtk-rlottie-0.8.1" = "sha256-V0R3Ns4BXCPfMlyWQWXlhdOFMbUXQKNXjry2zHlKwew=";
+      "origami-0.8.1" = "sha256-4hW0jOZB9WW51HK0TCq9MvUooDSQEnOhwzxuES+Ol0M=";
     };
   };
 
