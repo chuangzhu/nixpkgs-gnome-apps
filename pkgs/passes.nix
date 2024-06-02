@@ -64,7 +64,10 @@ python3.pkgs.buildPythonApplication rec {
     )
   '';
 
-  passthru.updateScript = unstableGitUpdater { url = src.meta.homepage; };
+  passthru.updateScript = unstableGitUpdater {
+    tagPrefix = "v";
+    url = src.meta.homepage;
+  };
 
   meta = with lib; {
     description = "Digital pass manager";

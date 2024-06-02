@@ -18,7 +18,7 @@
 
 python3.pkgs.buildPythonApplication rec {
   pname = "bunker";
-  version = "unstable-2023-05-11";
+  version = "0-unstable-2023-05-11";
 
   format = "other";
 

@@ -29,7 +29,7 @@
               let script = flatten (value.passthru.updateScript.command or value.passthru.updateScript); in
               "UPDATE_NIX_ATTR_PATH=packages.${stdenv.hostPlatform.system}.${name} ${escapeShellArgs script}" +
               (optionalString (hasInfix "nix-update" (toString script)) " --flake"))
-          ) "set -xe" self.packages.${stdenv.hostPlatform.system}))
+          ) "set -x" self.packages.${stdenv.hostPlatform.system}))
         ];
       };
     });

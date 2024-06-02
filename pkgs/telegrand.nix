@@ -95,7 +95,10 @@ stdenv.mkDerivation (finalAttrs: {
 
   checkInputs = [ clippy ];
 
-  passthru.updateScript = unstableGitUpdater { url = finalAttrs.src.meta.homepage; };
+  passthru.updateScript = unstableGitUpdater {
+    tagPrefix = "v";
+    url = finalAttrs.src.meta.homepage;
+  };
 
   meta = with lib; {
     homepage = "https://github.com/paper-plane-developers/paper-plane/";

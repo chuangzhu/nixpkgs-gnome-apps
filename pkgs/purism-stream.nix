@@ -19,7 +19,7 @@
 
 python3.pkgs.buildPythonApplication rec {
   pname = "purism-stream";
-  version = "unstable-2022-11-03";
+  version = "0.1.6-unstable-2022-11-03";
 
   format = "other";
 

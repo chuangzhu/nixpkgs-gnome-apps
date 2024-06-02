@@ -17,7 +17,7 @@
 
 python3.pkgs.buildPythonApplication rec {
   pname = "flashcards";
-  version = "unstable-2023-07-26";
+  version = "0-unstable-2023-07-26";
 
   format = "other";
 
