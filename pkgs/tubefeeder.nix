@@ -19,19 +19,20 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "pipeline";
-  version = "1.14.1";
+  version = "1.15.0";
 
   src = fetchFromGitLab {
     owner = "schmiddi-on-mobile";
     repo = "pipeline";
     rev = "v${finalAttrs.version}";
-    hash = "sha256-CQFxNA6gC5mUdyFbf/oMK5kLtzRhglXCDHnyb9XQOSg=";
+    hash = "sha256-tZyAQz7mhd+YXaO6+XYpUxza5ViVELE3J0Zeu11fr/U=";
   };
 
   cargoDeps = rustPlatform.importCargoLock {
     lockFile = finalAttrs.src + /Cargo.lock;
     outputHashes = {
-      "tf_core-0.1.4" = "sha256-bWkF1ezdDZyuP2zo5EIvB/Br6HFpdmkDijpQii/4i68=";
+      "piped-openapi-sdk-1.0.0" = "sha256-UFzMYYqCzO6KyJvjvK/hBJtz3FOuSC2gWjKp72WFEGk=";
+      "tf_core-0.1.4" = "sha256-IW5d0mn/olgm9ydN45ZaDd5AQSGj2kM7QvCHgZSnd8w=";
     };
   };
 
