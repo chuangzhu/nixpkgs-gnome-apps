@@ -21,6 +21,9 @@
 , gst_all_1
 , gtuber
 , glib-networking
+, gnome
+, webp-pixbuf-loader
+, librsvg
 , nix-update-script
 }:
 
@@ -84,6 +87,17 @@ stdenv.mkDerivation (finalAttrs: {
     gtuber
     glib-networking # For GIO_EXTRA_MODULES. Fixes "TLS support is not available"
   ];
+
+  # Pull in WebP support for YouTube avatars.
+  # In postInstall to run before gappsWrapperArgsHook.
+  postInstall = ''
+    export GDK_PIXBUF_MODULE_FILE="${gnome._gdkPixbufCacheBuilder_DO_NOT_USE {
+      extraLoaders = [
+        webp-pixbuf-loader
+        librsvg
+      ];
+    }}"
+  '';
 
   passthru.updateScript = nix-update-script { attrPath = finalAttrs.pname; };
 
