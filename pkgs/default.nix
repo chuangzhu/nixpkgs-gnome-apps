@@ -1,31 +1,13 @@
-{ lib
-, fetchFromGitLab
-, blueprint-compiler
-, ...
-} @ pkgs:
+{ callPackage, ... }:
 
-let
-  callPackage = lib.callPackageWith (pkgs // rec {
-    blueprint-compiler_0_6 = blueprint-compiler.overrideAttrs (old: rec {
-      version = "0.6.0";
-      src = fetchFromGitLab {
-        domain = "gitlab.gnome.org";
-        owner = "jwestman";
-        repo = "blueprint-compiler";
-        rev = "v${version}";
-        hash = "sha256-L6EGterkZ8EB6xSnJDZ3IMuOumpTpEGnU74X3UgC7k0=";
-      };
-    });
-  });
-in
-
-{
+rec {
   purism-stream = callPackage ./purism-stream.nix { };
   gadgetcontroller = callPackage ./gadgetcontroller.nix { };
   phosh-osk-stub= callPackage ./phosh-osk-stub.nix { };
   bunker = callPackage ./bunker.nix { };
   avvie = callPackage ./avvie.nix { };
   flashcards = callPackage ./flashcards.nix { };
-  pipeline = callPackage ./tubefeeder.nix { };
+  gtuber = callPackage ./gtuber.nix { };
+  pipeline = callPackage ./tubefeeder.nix { inherit gtuber; };
   dewduct = callPackage ./dewduct.nix { };
 }

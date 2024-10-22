@@ -14,26 +14,33 @@
 , glib
 , appstream-glib
 , desktop-file-utils
-, blueprint-compiler
+# , blueprint-compiler
+, buildPackages
+, sqlite
+, clapper
+, gst_all_1
+, gtuber
+, glib-networking
 , nix-update-script
 }:
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "pipeline";
-  version = "1.15.0";
+  version = "2.0.2";
 
   src = fetchFromGitLab {
     owner = "schmiddi-on-mobile";
     repo = "pipeline";
     rev = "v${finalAttrs.version}";
-    hash = "sha256-tZyAQz7mhd+YXaO6+XYpUxza5ViVELE3J0Zeu11fr/U=";
+    hash = "sha256-8LKd7zZuwo/HtxFo8x8UpO1Y8/DnTZmaOYrc9NmnIrc=";
   };
 
   cargoDeps = rustPlatform.importCargoLock {
     lockFile = finalAttrs.src + /Cargo.lock;
     outputHashes = {
+      "clapper-0.1.0" = "sha256-IFFqfSq2OpzfopQXSYfnJ68HGLY+rvcLqk7NTdDd+28=";
       "piped-openapi-sdk-1.0.0" = "sha256-UFzMYYqCzO6KyJvjvK/hBJtz3FOuSC2gWjKp72WFEGk=";
-      "tf_core-0.1.4" = "sha256-IW5d0mn/olgm9ydN45ZaDd5AQSGj2kM7QvCHgZSnd8w=";
+      "pipeline-api-0.1.0" = "sha256-h094ZAJOqX9QC1EUAtzIVztudhndXglkYLcFbH/mpqQ=";
     };
   };
 
@@ -48,12 +55,34 @@ stdenv.mkDerivation (finalAttrs: {
     glib
     appstream-glib
     desktop-file-utils
-    blueprint-compiler
+
+    # https://nixpk.gs/pr-tracker.html?pr=348481
+    (buildPackages.blueprint-compiler.overrideAttrs {
+      version = "0.14.0";
+      src = buildPackages.fetchFromGitLab {
+        domain = "gitlab.gnome.org";
+        owner = "jwestman";
+        repo = "blueprint-compiler";
+        rev = "v0.14.0";
+        hash = "sha256-pkbTxCN7LagIbOtpiUCkh40aHw6uRtalQVFa47waXjU=";
+      };
+    })
   ];
   buildInputs = [
     gtk4
     libadwaita
     openssl
+    sqlite
+    clapper
+
+    # These should be clapper's propagatedBuildInputs
+    gst_all_1.gstreamer
+    gst_all_1.gst-libav
+    gst_all_1.gst-plugins-base
+    (gst_all_1.gst-plugins-good.override { gtkSupport = true; })
+    gst_all_1.gst-plugins-bad
+    gtuber
+    glib-networking # For GIO_EXTRA_MODULES. Fixes "TLS support is not available"
   ];
 
   passthru.updateScript = nix-update-script { attrPath = finalAttrs.pname; };

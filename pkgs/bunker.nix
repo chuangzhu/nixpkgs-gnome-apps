@@ -1,6 +1,7 @@
 { lib
 , python3
 , fetchFromSourcehut
+, fetchpatch2
 , gtk4
 , libadwaita
 , gobject-introspection
@@ -10,7 +11,7 @@
 , gettext
 , glib
 , desktop-file-utils
-, blueprint-compiler_0_6
+, blueprint-compiler
 , wrapGAppsHook4
 , gopass
 , unstableGitUpdater
@@ -28,6 +29,24 @@ python3.pkgs.buildPythonApplication rec {
     rev = "c250e2bf46b50534a65526f40380e2188e6a948b"; # master
     hash = "sha256-+YF7XwuqabHJ4JrO0WZ5Ef1g+HeL0B4qO6MGeCMiFB8=";
   };
+  patches = [
+    (fetchpatch2 {
+      url = "https://lists.sr.ht/~quark97/Bunker/%3C20241005072550.366436-1-chuang+git@melty.land%3E/raw";
+      hash = "sha256-sBqzJB/dNTnCNC9qeJih8QVLR89TR2rCrXqGUDw1BWg=";
+    })
+    (fetchpatch2 {
+      url = "https://lists.sr.ht/~quark97/Bunker/%3C20241005072550.366436-2-chuang+git@melty.land%3E/raw";
+      hash = "sha256-wXS/1eGNpoop0ijKF/9tDU1Ku+6CcRLMUuJs/zIdbvs=";
+    })
+    (fetchpatch2 {
+      url = "https://lists.sr.ht/~quark97/Bunker/%3C20241005072550.366436-3-chuang+git@melty.land%3E/raw";
+      hash = "sha256-sQ0AfwVzWNlqApTweJdEdgkLpppyET4AnDM1WJ/+WM0=";
+    })
+    (fetchpatch2 {
+      url = "https://lists.sr.ht/~quark97/Bunker/%3C20241005072550.366436-4-chuang+git@melty.land%3E/raw";
+      hash = "sha256-ZiYu9lgfbzpstBirVe1FrJ7ndpcj/JTo+IdVGNAfjW0=";
+    })
+  ];
 
   nativeBuildInputs = [
     meson
@@ -36,7 +55,7 @@ python3.pkgs.buildPythonApplication rec {
     gettext
     glib
     desktop-file-utils
-    blueprint-compiler_0_6
+    blueprint-compiler
     wrapGAppsHook4
   ];
 

@@ -12,16 +12,16 @@
 
 rustPlatform.buildRustPackage rec {
   pname = "dewduct";
-  version = "0.2.2";
+  version = "0.2.3";
 
   src = fetchFromGitHub {
     owner = "DaKnig";
     repo = "DewDuct";
     rev = "v${version}";
-    hash = "sha256-PezCs4UxlapXqDOuVJ5QNjMQtQle/DE2eBnVpMYMu54=";
+    hash = "sha256-XNHq5tuogJkdTGq37/mCZVXzrmjE1tKLa3rGOpg6T3Y=";
   };
 
-  cargoHash = "sha256-HkmFjgF1j0tH01iUNjwTH2wTptHBoAY8Flh5rz/Kgmw=";
+  cargoHash = "sha256-MBPmlUNI2YNLTS0S+iSKnuPwelf7rS4LQ0GW+kFJQ1Q=";
 
   nativeBuildInputs = [
     pkg-config
