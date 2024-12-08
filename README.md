@@ -13,13 +13,13 @@ In long term all of them should be upstreamed to Nixpkgs, but this overlay is fo
 Launch directly:
 
 ```shellsession
-$ nix --extra-experimental-features='nix-command flakes' run github:chuangzhu/nixpkgs-gnome-apps#flashcards
+$ nix --extra-experimental-features 'nix-command flakes' run github:chuangzhu/nixpkgs-gnome-apps#flashcards
 ```
 
 Install imperatively:
 
 ```shellsession
-$ nix --extra-experimental-features='nix-command flakes' profile install github:chuangzhu/nixpkgs-gnome-apps#flashcards
+$ nix --extra-experimental-features 'nix-command flakes' profile install github:chuangzhu/nixpkgs-gnome-apps#flashcards
 ```
 
 Install declaratively (NixOS):

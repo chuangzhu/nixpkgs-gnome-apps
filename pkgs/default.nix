@@ -13,7 +13,7 @@ rec {
   highscore-mgba = callPackage ./highscore-mgba.nix { inherit libhighscore; };
   highscore-nestopia = callPackage ./highscore-nestopia.nix { inherit libhighscore; };
   highscore-with-all-cores = symlinkJoin {
-    name = "highscore-with-all-cores";
+    name = "highscore";
     paths = [ highscore highscore-mgba highscore-nestopia ];
   };
 }
