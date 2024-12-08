@@ -3,7 +3,6 @@
 , fetchFromGitHub
 , cmake
 , pkg-config
-, glib
 , libhighscore
 , unstableGitUpdater
 }:
@@ -27,7 +26,6 @@ stdenv.mkDerivation (finalAttrs: {
   ];
 
   buildInputs = [
-    glib
     libhighscore
   ];
 

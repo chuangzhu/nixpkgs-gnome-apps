@@ -31,7 +31,8 @@ stdenv.mkDerivation (finalAttrs: {
     vala # For vapigen
   ];
 
-  buildInputs = [
+  # In highscore-1.pc
+  propagatedBuildInputs = [
     glib
   ];
 

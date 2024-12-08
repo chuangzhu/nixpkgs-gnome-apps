@@ -11,8 +11,9 @@ rec {
   libhighscore = callPackage ./libhighscore.nix { };
   highscore = callPackage ./highscore.nix { inherit libhighscore; };
   highscore-mgba = callPackage ./highscore-mgba.nix { inherit libhighscore; };
-  highscore-with-mgba = symlinkJoin {
-    name = "highscore-with-mgba";
-    paths = [ highscore highscore-mgba ];
+  highscore-nestopia = callPackage ./highscore-nestopia.nix { inherit libhighscore; };
+  highscore-with-all-cores = symlinkJoin {
+    name = "highscore-with-all-cores";
+    paths = [ highscore highscore-mgba highscore-nestopia ];
   };
 }
