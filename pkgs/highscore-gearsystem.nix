@@ -1,25 +1,27 @@
 { lib
 , stdenv
-, fetchFromGitLab
+, fetchFromGitHub
 , meson
 , ninja
 , pkg-config
 , libhighscore
+, SDL2
+, libpcap
 , unstableGitUpdater
 }:
 
 stdenv.mkDerivation (finalAttrs: {
-  pname = "highscore-nestopia";
+  pname = "highscore-gearsystem";
   version = "0-unstable-2024-11-16";
 
-  src = fetchFromGitLab {
-    owner = "alice-m";
-    repo = "nestopia";
-    rev = "36c1f37b06bf533d45ba5186e22bb297f3597dd1";
-    hash = "sha256-tQV6amwt05qEQjzHqgXtaYt1D4wQ3lG3xlasjQRggSA=";
+  src = fetchFromGitHub {
+    owner = "alice-mkh";
+    repo = "gearsystem";
+    rev = "3a32a7c4e14871c2c79bcbb45182cb870d5d9836";
+    hash = "sha256-U/pTC84AzFixSJB4AfPlrliMQLmtzvjPMAaR40FiCrY=";
   };
 
-  sourceRoot = "source/highscore";
+  sourceRoot = "source/platforms/highscore";
 
   nativeBuildInputs = [
     meson
@@ -34,9 +36,9 @@ stdenv.mkDerivation (finalAttrs: {
   passthru.updateScript = unstableGitUpdater { url = finalAttrs.src.gitRepoUrl; };
 
   meta = {
-    description = "Port of Nestopia to Highscore";
+    description = "Port of Gearsystem to Highscore";
     inherit (finalAttrs.src.meta) homepage;
-    license = lib.licenses.gpl2Plus;
+    license = lib.licenses.gpl3Plus;
     maintainers = with lib.maintainers; [ chuangzhu ];
   };
 })

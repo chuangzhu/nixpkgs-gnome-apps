@@ -9,14 +9,14 @@
 }:
 
 stdenv.mkDerivation (finalAttrs: {
-  pname = "highscore-nestopia";
+  pname = "highscore-prosystem";
   version = "0-unstable-2024-11-16";
 
   src = fetchFromGitLab {
     owner = "alice-m";
-    repo = "nestopia";
-    rev = "36c1f37b06bf533d45ba5186e22bb297f3597dd1";
-    hash = "sha256-tQV6amwt05qEQjzHqgXtaYt1D4wQ3lG3xlasjQRggSA=";
+    repo = "prosystem";
+    rev = "bb23771215e048edd4a7af40640503e795f17b6b";
+    hash = "sha256-Hy/NWai976741uCIKGcKWtLr+iSVfH9aAS9AKKxz0DY=";
   };
 
   sourceRoot = "source/highscore";
@@ -34,7 +34,7 @@ stdenv.mkDerivation (finalAttrs: {
   passthru.updateScript = unstableGitUpdater { url = finalAttrs.src.gitRepoUrl; };
 
   meta = {
-    description = "Port of Nestopia to Highscore";
+    description = "Port of ProSystem to Highscore";
     inherit (finalAttrs.src.meta) homepage;
     license = lib.licenses.gpl2Plus;
     maintainers = with lib.maintainers; [ chuangzhu ];

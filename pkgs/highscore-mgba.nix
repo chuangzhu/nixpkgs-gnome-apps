@@ -50,11 +50,11 @@ stdenv.mkDerivation (finalAttrs: {
     (lib.cmakeBool "SKIP_LIBRARY" true)
   ];
 
-  passthru.updateScript = unstableGitUpdater { url = finalAttrs.src.meta.homepage; };
+  passthru.updateScript = unstableGitUpdater { url = finalAttrs.src.gitRepoUrl; };
 
   meta = {
     description = "Port of mGBA to Highscore";
-    homepage = "https://github.com/alice-mkh/mgba";
+    inherit (finalAttrs.src.meta) homepage;
     license = lib.licenses.mpl20;
     maintainers = with lib.maintainers; [ chuangzhu ];
   };

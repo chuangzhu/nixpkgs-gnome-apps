@@ -66,6 +66,8 @@ stdenv.mkDerivation (finalAttrs: {
     repo = "highscore";
     rev = "37f0d5f366ca74c5e6479b97d98c4cff77319e4e";
     hash = "sha256-mlsSzmQh+9ZAxp+7hyRosgLtciOES3fc8fclQFlTw1Y=";
+    # rev = "7d8db5794fb238765036a3a2882bd5a794f6c45d"; # wip/alice/touch-controls
+    # hash = "sha256-cCpZEEVMdFlivXW6BzEDhT4sZlQDKWe8LGvfP1tR11w=";
   };
 
   patches = [
@@ -113,7 +115,7 @@ stdenv.mkDerivation (finalAttrs: {
     )
   '';
 
-  passthru.updateScript = unstableGitUpdater { url = finalAttrs.src.meta.homepage; };
+  passthru.updateScript = unstableGitUpdater { url = finalAttrs.src.gitRepoUrl; };
 
   meta = {
     description = "Rewrite of Highscore, formerly gnome-games";

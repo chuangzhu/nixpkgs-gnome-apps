@@ -1,6 +1,6 @@
 { lib
 , stdenv
-, fetchFromGitLab
+, fetchFromGitHub
 , meson
 , ninja
 , pkg-config
@@ -9,17 +9,17 @@
 }:
 
 stdenv.mkDerivation (finalAttrs: {
-  pname = "highscore-nestopia";
-  version = "0-unstable-2024-11-16";
+  pname = "highscore-stella";
+  version = "0-unstable-2024-11-18";
 
-  src = fetchFromGitLab {
-    owner = "alice-m";
-    repo = "nestopia";
-    rev = "36c1f37b06bf533d45ba5186e22bb297f3597dd1";
-    hash = "sha256-tQV6amwt05qEQjzHqgXtaYt1D4wQ3lG3xlasjQRggSA=";
+  src = fetchFromGitHub {
+    owner = "alice-mkh";
+    repo = "stella";
+    rev = "7b6c5a5118421a03f2795a03d0b45573a29a7fdb";
+    hash = "sha256-yDff+YNE7aqaUOmm02UDxhjbiMowj1yaKZaTgqHFGaY=";
   };
 
-  sourceRoot = "source/highscore";
+  sourceRoot = "source/src/os/highscore";
 
   nativeBuildInputs = [
     meson
@@ -34,9 +34,9 @@ stdenv.mkDerivation (finalAttrs: {
   passthru.updateScript = unstableGitUpdater { url = finalAttrs.src.gitRepoUrl; };
 
   meta = {
-    description = "Port of Nestopia to Highscore";
+    description = "Port of Stella to Highscore";
     inherit (finalAttrs.src.meta) homepage;
-    license = lib.licenses.gpl2Plus;
+    license = lib.licenses.gpl2Only;
     maintainers = with lib.maintainers; [ chuangzhu ];
   };
 })

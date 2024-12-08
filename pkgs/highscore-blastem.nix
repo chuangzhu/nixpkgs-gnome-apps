@@ -1,6 +1,6 @@
 { lib
 , stdenv
-, fetchFromGitLab
+, fetchFromGitHub
 , meson
 , ninja
 , pkg-config
@@ -9,17 +9,21 @@
 }:
 
 stdenv.mkDerivation (finalAttrs: {
-  pname = "highscore-nestopia";
+  pname = "highscore-blastem";
   version = "0-unstable-2024-11-16";
 
-  src = fetchFromGitLab {
-    owner = "alice-m";
-    repo = "nestopia";
-    rev = "36c1f37b06bf533d45ba5186e22bb297f3597dd1";
-    hash = "sha256-tQV6amwt05qEQjzHqgXtaYt1D4wQ3lG3xlasjQRggSA=";
+  src = fetchFromGitHub {
+    owner = "alice-mkh";
+    repo = "blastem-highscore";
+    rev = "4e7962668a58bb0904d8a94b86082a297dba88fb";
+    hash = "sha256-uhYfsofdBI2l+J3RT3JuTAmO+QwaKt1TXC4steO0KSo=";
   };
 
   sourceRoot = "source/highscore";
+
+  postPatch = ''
+    patchShebangs gen-db.sh
+  '';
 
   nativeBuildInputs = [
     meson
@@ -31,12 +35,14 @@ stdenv.mkDerivation (finalAttrs: {
     libhighscore
   ];
 
+  env.NIX_CFLAGS_COMPILE = "-Wno-error=maybe-uninitialized";
+
   passthru.updateScript = unstableGitUpdater { url = finalAttrs.src.gitRepoUrl; };
 
   meta = {
-    description = "Port of Nestopia to Highscore";
+    description = "Port of BlastEm to Highscore";
     inherit (finalAttrs.src.meta) homepage;
-    license = lib.licenses.gpl2Plus;
+    license = lib.licenses.gpl3Plus;
     maintainers = with lib.maintainers; [ chuangzhu ];
   };
 })

@@ -1,22 +1,23 @@
 { lib
 , stdenv
-, fetchFromGitLab
+, fetchFromGitHub
 , meson
 , ninja
 , pkg-config
 , libhighscore
+, zstd
 , unstableGitUpdater
 }:
 
 stdenv.mkDerivation (finalAttrs: {
-  pname = "highscore-nestopia";
-  version = "0-unstable-2024-11-16";
+  pname = "highscore-mednafen";
+  version = "0-unstable-2024-11-22";
 
-  src = fetchFromGitLab {
-    owner = "alice-m";
-    repo = "nestopia";
-    rev = "36c1f37b06bf533d45ba5186e22bb297f3597dd1";
-    hash = "sha256-tQV6amwt05qEQjzHqgXtaYt1D4wQ3lG3xlasjQRggSA=";
+  src = fetchFromGitHub {
+    owner = "alice-mkh";
+    repo = "mednafen-highscore";
+    rev = "2bf66e150646f972d58c6fe1a18316b342f0c0c4";
+    hash = "sha256-uP4E8rLcNSiea9oxjNN+x7dbWsd+x32c3GVQHqmoEH0=";
   };
 
   sourceRoot = "source/highscore";
@@ -29,12 +30,13 @@ stdenv.mkDerivation (finalAttrs: {
 
   buildInputs = [
     libhighscore
+    zstd
   ];
 
   passthru.updateScript = unstableGitUpdater { url = finalAttrs.src.gitRepoUrl; };
 
   meta = {
-    description = "Port of Nestopia to Highscore";
+    description = "Port of Mednafen to Highscore";
     inherit (finalAttrs.src.meta) homepage;
     license = lib.licenses.gpl2Plus;
     maintainers = with lib.maintainers; [ chuangzhu ];

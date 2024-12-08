@@ -36,7 +36,7 @@ stdenv.mkDerivation (finalAttrs: {
     glib
   ];
 
-  passthru.updateScript = unstableGitUpdater { url = finalAttrs.src.meta.homepage; };
+  passthru.updateScript = unstableGitUpdater { url = finalAttrs.src.gitRepoUrl; };
 
   meta = {
     description = "Interface for porting emulators to Highscore";
