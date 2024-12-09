@@ -12,7 +12,7 @@ rec {
   highscore = callPackage ./highscore.nix { inherit libhighscore; };
   highscore-with-all-cores = symlinkJoin {
     name = "highscore";
-    paths = [
+    paths = builtins.filter (p: p.meta.available) [
       highscore
       highscore-blastem
       highscore-bsnes

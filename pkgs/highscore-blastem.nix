@@ -44,5 +44,6 @@ stdenv.mkDerivation (finalAttrs: {
     inherit (finalAttrs.src.meta) homepage;
     license = lib.licenses.gpl3Plus;
     maintainers = with lib.maintainers; [ chuangzhu ];
+    broken = stdenv.hostPlatform.isAarch64;
   };
 })
