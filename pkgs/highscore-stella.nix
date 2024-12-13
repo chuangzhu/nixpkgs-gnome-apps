@@ -31,7 +31,7 @@ stdenv.mkDerivation (finalAttrs: {
     libhighscore
   ];
 
-  passthru.updateScript = unstableGitUpdater { url = finalAttrs.src.gitRepoUrl; };
+  passthru.updateScript = unstableGitUpdater { url = finalAttrs.src.gitRepoUrl; hardcodeZeroVersion = true; };
 
   meta = {
     description = "Port of Stella to Highscore";

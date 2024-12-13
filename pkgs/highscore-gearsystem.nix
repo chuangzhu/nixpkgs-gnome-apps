@@ -5,8 +5,6 @@
 , ninja
 , pkg-config
 , libhighscore
-, SDL2
-, libpcap
 , unstableGitUpdater
 }:
 
@@ -33,7 +31,7 @@ stdenv.mkDerivation (finalAttrs: {
     libhighscore
   ];
 
-  passthru.updateScript = unstableGitUpdater { url = finalAttrs.src.gitRepoUrl; };
+  passthru.updateScript = unstableGitUpdater { url = finalAttrs.src.gitRepoUrl; hardcodeZeroVersion = true; };
 
   meta = {
     description = "Port of Gearsystem to Highscore";

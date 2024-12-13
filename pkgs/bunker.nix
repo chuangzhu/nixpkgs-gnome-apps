@@ -81,7 +81,7 @@ python3.pkgs.buildPythonApplication rec {
     )
   '';
 
-  passthru.updateScript = unstableGitUpdater { url = src.meta.homepage; };
+  passthru.updateScript = unstableGitUpdater { url = src.gitRepoUrl; hardcodeZeroVersion = true; };
 
   meta = with lib; {
     description = "GTK4 Frontend to GoPass";

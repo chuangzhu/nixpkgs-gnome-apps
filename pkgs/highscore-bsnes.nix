@@ -41,7 +41,7 @@ stdenv.mkDerivation (finalAttrs: {
 
   enableParallelBuilding = true;
 
-  passthru.updateScript = unstableGitUpdater { url = finalAttrs.src.gitRepoUrl; };
+  passthru.updateScript = unstableGitUpdater { url = finalAttrs.src.gitRepoUrl; hardcodeZeroVersion = true; };
 
   meta = {
     description = "Port of bsnes to Highscore";

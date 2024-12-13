@@ -33,7 +33,7 @@ stdenv.mkDerivation (finalAttrs: {
     zstd
   ];
 
-  passthru.updateScript = unstableGitUpdater { url = finalAttrs.src.gitRepoUrl; };
+  passthru.updateScript = unstableGitUpdater { url = finalAttrs.src.gitRepoUrl; hardcodeZeroVersion = true; };
 
   meta = {
     description = "Port of Mednafen to Highscore";
