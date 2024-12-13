@@ -20,6 +20,7 @@
 , SDL2
 , librsvg
 , libmirage
+, feedbackd
 , hidapi
 , unstableGitUpdater
 }:
@@ -58,16 +59,14 @@ in
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "highscore";
-  version = "0-unstable-2024-11-29";
+  version = "0-unstable-2024-12-13";
 
   src = fetchFromGitLab {
     domain = "gitlab.gnome.org";
     owner = "World";
     repo = "highscore";
-    rev = "37f0d5f366ca74c5e6479b97d98c4cff77319e4e";
-    hash = "sha256-mlsSzmQh+9ZAxp+7hyRosgLtciOES3fc8fclQFlTw1Y=";
-    # rev = "7d8db5794fb238765036a3a2882bd5a794f6c45d"; # wip/alice/touch-controls
-    # hash = "sha256-cCpZEEVMdFlivXW6BzEDhT4sZlQDKWe8LGvfP1tR11w=";
+    rev = "0695743771a9eed52f4a6e6e1cd9e707050e6c44";
+    hash = "sha256-gdWusLnx3xpotrL6bJwL2iNYCVDiUw2R7BvxBCTOGG8=";
   };
 
   patches = [
@@ -106,6 +105,7 @@ stdenv.mkDerivation (finalAttrs: {
     SDL2
     librsvg
     libmirage'
+    feedbackd
   ];
 
   # When Highscore is launched from PATH

@@ -12,27 +12,32 @@
 , presage
 , gnome-desktop
 , libxkbcommon
+, gmobile
 , meson
 , cmake
 , pkg-config
 , ninja
 , wrapGAppsHook
+, wayland-scanner
+, python3
 , gitUpdater
 }:
 
 stdenv.mkDerivation rec {
   pname = "phosh-osk-stub";
-  version = "0.42_rc1";
+  version = "0.43.0";
 
   src = fetchFromGitLab {
     domain = "gitlab.gnome.org";
     owner = "guidog";
     repo = pname;
     rev = "v${version}";
-    hash = "sha256-/reO+qZtxF9T5CRAQkskFvpcYk0R46BwB04SX/W8GXg=";
+    hash = "sha256-A9kQaleaoQ4gz6LmSc/nfuo7UltpNFwv+j8Nr7ZIG3w=";
   };
 
   postPatch = ''
+    patchShebangs tools/
+    substituteInPlace data/completers/meson.build --replace-fail "../po" "../../po"
     # https://github.com/NixOS/nixpkgs/issues/36468
     sed -i "/gio_dep/a gio_unix_dep = dependency('gio-unix-2.0', version: glib_ver_cmp)" meson.build
     sed -i '/gio_dep/a gio_unix_dep,' src/meson.build src/completers/meson.build
@@ -46,6 +51,8 @@ stdenv.mkDerivation rec {
     cmake
     ninja
     wrapGAppsHook
+    wayland-scanner
+    python3
   ];
 
   buildInputs = [
@@ -60,6 +67,7 @@ stdenv.mkDerivation rec {
     presage
     gnome-desktop
     libxkbcommon
+    gmobile
   ];
 
   preInstall = ''
