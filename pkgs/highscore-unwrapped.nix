@@ -58,7 +58,7 @@ let
 in
 
 stdenv.mkDerivation (finalAttrs: {
-  pname = "highscore";
+  pname = "highscore-unwrapped";
   version = "0-unstable-2024-12-13";
 
   src = fetchFromGitLab {
@@ -70,8 +70,9 @@ stdenv.mkDerivation (finalAttrs: {
   };
 
   patches = [
-    # Allow discovering cores in symlink destinations (Nix profiles, symlinkJoin, etc.)
-    ./cores-dir-from-argv0.patch
+    # Highscore finds cores under $out/lib/highscore/cores/
+    # Allow the wrapper to override it with $HIGHSCORE_CORES_DIR
+    ./cores-dir-from-envvar.patch
   ];
 
   postPatch = ''
@@ -107,13 +108,6 @@ stdenv.mkDerivation (finalAttrs: {
     libmirage'
     feedbackd
   ];
-
-  # When Highscore is launched from PATH
-  preFixup = ''
-    gappsWrapperArgs+=(
-      --resolve-argv0
-    )
-  '';
 
   passthru.updateScript = unstableGitUpdater { url = finalAttrs.src.gitRepoUrl; hardcodeZeroVersion = true; };
 

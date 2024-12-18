@@ -1,4 +1,4 @@
-{ callPackage, symlinkJoin, ... }:
+{ callPackage, ... }:
 
 rec {
   purism-stream = callPackage ./purism-stream.nix { };
@@ -8,11 +8,10 @@ rec {
   flashcards = callPackage ./flashcards.nix { };
   dewduct = callPackage ./dewduct.nix { };
   libhighscore = callPackage ./libhighscore.nix { };
-  highscore = callPackage ./highscore.nix { inherit libhighscore; };
-  highscore-with-all-cores = symlinkJoin {
-    name = "highscore";
-    paths = builtins.filter (p: p.meta.available) [
-      highscore
+  highscore-unwrapped = callPackage ./highscore-unwrapped.nix { inherit libhighscore; };
+  highscore = callPackage ./highscore-wrapper.nix {
+    inherit
+      highscore-unwrapped
       highscore-blastem
       highscore-bsnes
       highscore-desmume
@@ -22,9 +21,9 @@ rec {
       highscore-mupen64plus
       highscore-nestopia
       highscore-prosystem
-      highscore-stella
-    ];
+      highscore-stella;
   };
+  highscore-with-all-cores = throw "highscore-with-all-cores is renamed to highscore";
   highscore-blastem = callPackage ./highscore-blastem.nix { inherit libhighscore; };
   highscore-bsnes = callPackage ./highscore-bsnes.nix { inherit libhighscore; };
   highscore-desmume = callPackage ./highscore-desmume.nix { inherit libhighscore; };
