@@ -58,14 +58,14 @@ in
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "highscore-unwrapped";
-  version = "0-unstable-2024-12-13";
+  version = "0-unstable-2024-12-18";
 
   src = fetchFromGitLab {
     domain = "gitlab.gnome.org";
     owner = "World";
     repo = "highscore";
-    rev = "0695743771a9eed52f4a6e6e1cd9e707050e6c44";
-    hash = "sha256-gdWusLnx3xpotrL6bJwL2iNYCVDiUw2R7BvxBCTOGG8=";
+    rev = "a9eded89e01c523b2947b3db1a94e15a78fc5666";
+    hash = "sha256-eEO2LPQM3OuluKGkaxaKYRMZq13jLd8VH8e+d9sdyBs=";
   };
 
   patches = [
