@@ -1,4 +1,4 @@
-{ callPackage, ... }:
+{ callPackage, lib, ... }:
 
 rec {
   purism-stream = callPackage ./purism-stream.nix { };
@@ -23,7 +23,7 @@ rec {
       highscore-prosystem
       highscore-stella;
   };
-  highscore-with-all-cores = throw "highscore-with-all-cores is renamed to highscore";
+  highscore-with-all-cores = lib.warn "highscore-with-all-cores is renamed to highscore" highscore;
   highscore-blastem = callPackage ./highscore-blastem.nix { inherit libhighscore; };
   highscore-bsnes = callPackage ./highscore-bsnes.nix { inherit libhighscore; };
   highscore-desmume = callPackage ./highscore-desmume.nix { inherit libhighscore; };

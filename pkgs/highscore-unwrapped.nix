@@ -8,7 +8,6 @@
 , glib
 , gtk4
 , desktop-file-utils
-, wrapGAppsHook4
 , libgee
 , libadwaita
 , libhighscore
@@ -89,7 +88,8 @@ stdenv.mkDerivation (finalAttrs: {
     glib # For glib-compile-resources
     gtk4 # For gtk4-update-icon-cache
     desktop-file-utils
-    wrapGAppsHook4
+    # To prevent double wrapping, not wrapping it here
+    # wrapGAppsHook4
   ];
 
   buildInputs = [
