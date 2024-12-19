@@ -2,8 +2,8 @@
   symlinkJoin,
   wrapGAppsHook4,
   gtk4,
-  librsvg,
   feedbackd,
+  librsvg,
   highscore-unwrapped,
   highscore-blastem,
   highscore-bsnes,
@@ -16,6 +16,7 @@
   highscore-prosystem,
   highscore-stella,
 
+  # Allow users to override
   cores ? builtins.filter (p: p.meta.available) [
     highscore-blastem
     highscore-bsnes
@@ -41,13 +42,17 @@ symlinkJoin {
   ];
 
   buildInputs = [
+    # For gsettings-schemas
+    highscore-unwrapped
     gtk4
-    librsvg
     feedbackd
+    # For GDK_PIXBUF_MODULE_FILE
+    librsvg
   ];
 
   dontWrapGApps = true;
 
+  # symlinkJoin doesn't run other build phases
   postBuild = ''
     rm $out/share/dbus-1/services/app.drey.Highscore.service
     sed "s|Exec=.*/highscore|Exec=$out/bin/highscore|" \
@@ -58,7 +63,6 @@ symlinkJoin {
 
     makeWrapper ${highscore-unwrapped}/bin/highscore $out/bin/highscore \
       "''${gappsWrapperArgs[@]}" \
-      --prefix XDG_DATA_DIRS : $out/share/gsettings-schemas/${highscore-unwrapped.name} \
       --set HIGHSCORE_CORES_DIR $out/lib/highscore/cores
   '';
 }
