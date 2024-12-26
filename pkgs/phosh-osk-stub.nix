@@ -25,14 +25,14 @@
 
 stdenv.mkDerivation rec {
   pname = "phosh-osk-stub";
-  version = "0.43.0";
+  version = "0.44_rc1";
 
   src = fetchFromGitLab {
     domain = "gitlab.gnome.org";
     owner = "guidog";
     repo = pname;
     rev = "v${version}";
-    hash = "sha256-A9kQaleaoQ4gz6LmSc/nfuo7UltpNFwv+j8Nr7ZIG3w=";
+    hash = "sha256-jZ2r442Cys9u0oziF7jHYz6CP/cgm1Ga1dMYAqD+It0=";
   };
 
   postPatch = ''

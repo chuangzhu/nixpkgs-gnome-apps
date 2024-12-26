@@ -9,13 +9,13 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "highscore-mgba";
-  version = "0-unstable-2024-11-16";
+  version = "0-unstable-2024-12-24";
 
   src = fetchFromGitHub {
     owner = "alice-mkh";
     repo = "mgba";
-    rev = "0c719d3ca21b10fc7228231f9ce796c4d7df6a6b";
-    hash = "sha256-60v/h1uSWg4uMGL4gbUbaH5EhiymsbsnVcgda/HFRN0=";
+    rev = "dc524940d5439aa7efe13e7339abad5cb2b30df5";
+    hash = "sha256-YA8TBrqIedij9W9XuS7NeRqdHHfcwzxR22XOPOFSNsI=";
   };
 
   outputs = [ "out" "dev" "doc" ];

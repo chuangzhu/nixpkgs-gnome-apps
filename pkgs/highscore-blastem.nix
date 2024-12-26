@@ -10,13 +10,13 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "highscore-blastem";
-  version = "0-unstable-2024-11-16";
+  version = "0-unstable-2024-12-17";
 
   src = fetchFromGitHub {
     owner = "alice-mkh";
     repo = "blastem-highscore";
-    rev = "4e7962668a58bb0904d8a94b86082a297dba88fb";
-    hash = "sha256-uhYfsofdBI2l+J3RT3JuTAmO+QwaKt1TXC4steO0KSo=";
+    rev = "8b5dc82206c8bf15d2de11bdba96c2d1e1ffe53f";
+    hash = "sha256-YyH+1li+1M8RkVqBPOkiVBvQQJjofRL8pjcrfboGx1g=";
   };
 
   sourceRoot = "source/highscore";

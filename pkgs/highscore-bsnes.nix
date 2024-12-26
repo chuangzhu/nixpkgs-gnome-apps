@@ -8,13 +8,13 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "highscore-bsnes";
-  version = "0-unstable-2024-11-16";
+  version = "0-unstable-2024-12-17";
 
   src = fetchFromGitHub {
     owner = "alice-mkh";
     repo = "bsnes";
-    rev = "909811149ce04b2b9d21488507fdc0633e183194";
-    hash = "sha256-U2OgD8d2IUB26vmkSbtocAURpTwtSU3vSrylX4V5eRk=";
+    rev = "ea065538cc4a2ce7e0046ceba07244170571b2f8";
+    hash = "sha256-QDTyV/EDT21Ym8QnRRaKABWPqBJ2nhZfG4uscSctevo=";
   };
 
   sourceRoot = "source/bsnes";

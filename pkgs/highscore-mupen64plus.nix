@@ -11,13 +11,13 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "highscore-mupen64plus";
-  version = "0-unstable-2024-11-24";
+  version = "0-unstable-2024-12-25";
 
   src = fetchFromGitHub {
     owner = "alice-mkh";
     repo = "mupen64plus-highscore";
-    rev = "21ba520e72198e797accc05bbc58254e2136eb91";
-    hash = "sha256-DLkbILaTEKbBu3Amesw25ksm4ILCrD273CvG/3F9n38=";
+    rev = "a64ff811a7daa65e3503a46f9d2a78c6cb0cc175";
+    hash = "sha256-sgiig/yzIttmSLqcRGa35okYwQ/6nQQX7WX/PDNopQM=";
   };
 
   nativeBuildInputs = [

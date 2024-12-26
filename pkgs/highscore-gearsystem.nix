@@ -10,13 +10,13 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "highscore-gearsystem";
-  version = "0-unstable-2024-11-16";
+  version = "0-unstable-2024-12-24";
 
   src = fetchFromGitHub {
     owner = "alice-mkh";
     repo = "gearsystem";
-    rev = "3a32a7c4e14871c2c79bcbb45182cb870d5d9836";
-    hash = "sha256-U/pTC84AzFixSJB4AfPlrliMQLmtzvjPMAaR40FiCrY=";
+    rev = "2b1d152f551ecbb4222688892458395eab40f5f1";
+    hash = "sha256-TBk/Bu9OtnkcMnbAPsnHujn5tUXvYCmDgA+KKKp3KmA=";
   };
 
   sourceRoot = "source/platforms/highscore";

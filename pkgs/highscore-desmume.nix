@@ -12,13 +12,13 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "highscore-desmume";
-  version = "0-unstable-2024-11-16";
+  version = "0-unstable-2024-12-17";
 
   src = fetchFromGitHub {
     owner = "alice-mkh";
     repo = "desmume";
-    rev = "ca76b4a57e8a0e8883953f47d5a2f7a46179c200";
-    hash = "sha256-YeIipoUdpXd0RJVm0VGNkio4qNuj56esoJ5yK9ft0Xc=";
+    rev = "2bf455fb63ad533d8a8c36fcf2d521aeaa1b6811";
+    hash = "sha256-ti7bL8Dt6bSnM/+q+i4frrvjfXWppBlpwcRurbWkyyc=";
   };
 
   sourceRoot = "source/desmume/src/frontend/highscore";
