@@ -12,7 +12,7 @@
 , glib
 , desktop-file-utils
 , wrapGAppsHook
-, libsoup
+, libsoup_2_4
 , glib-networking
 , unstableGitUpdater
 }:
@@ -51,7 +51,7 @@ python3.pkgs.buildPythonApplication rec {
     gtk3
     libhandy
     gobject-introspection
-    libsoup
+    libsoup_2_4
     glib-networking
   ] ++ (with gst_all_1; [
     gstreamer
